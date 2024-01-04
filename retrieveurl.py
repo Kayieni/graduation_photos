@@ -1,5 +1,6 @@
 import urllib.request
 import csv
+import os
 
 photocode=0
 total=0
@@ -10,6 +11,11 @@ total=0
 # Please modify the url accordingly.
 
 url="https://img.snaphoto.gr/orkomosies/40140S/large/"
+
+# Check if the directory exists, if not, create it
+if not os.path.exists(".photos/"):
+    os.makedirs(".photos/")
+
 
 # csv file should have the following structure in order to work
 #   each line represents a set of photos:
