@@ -9,12 +9,12 @@ total=0
 # The letter "S" following the above number represents the set of photos depending on 
     # the date and time of the graduation. It is not standard and this has to change manually.
 # Please modify the url accordingly.
-
-url="https://img.snaphoto.gr/orkomosies/40140S/large/"
+graduation_code = "40142F"
+url="https://img.snaphoto.gr/orkomosies/"+graduation_code+"/large/"
 
 # Check if the directory exists, if not, create it
-if not os.path.exists(".photos/"):
-    os.makedirs(".photos/")
+if not os.path.exists("photos/"+graduation_code[:-1]+"/"):
+    os.makedirs("photos/"+graduation_code[:-1]+"/")
 
 
 # csv file should have the following structure in order to work
@@ -24,14 +24,14 @@ if not os.path.exists(".photos/"):
 #       third column is optional; it can contain the last 2 digits of the name of the last photo from the current set, 
 #           for checking purposes only. Its not used by the program
 
-with open("grad.csv", mode="r") as f:
+with open(str(graduation_code[:-1])+".csv", mode="r") as f:
     print("working on it, be patient...")
     file = csv.reader(f,delimiter="\t")
     for lines in file:
         counter=int(lines[0])
         photocode=int(lines[1].split("-")[2])
         while counter!=0:
-            urllib.request.urlretrieve(url + str(photocode).zfill(5) + ".jpg", "photos/"+ str(photocode).zfill(5) + ".png") 
+            urllib.request.urlretrieve(url + str(photocode).zfill(5) + ".jpg", "photos/"+graduation_code[:-1]+"/"+ str(photocode).zfill(5) + ".png") 
             counter-=1
             photocode+=1
             total+=1
